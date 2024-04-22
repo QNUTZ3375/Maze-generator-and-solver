@@ -14,7 +14,7 @@ boolean inClosedSet = false;
 int currPathLen = 0;
 int resPathLen = 0;
 Cell endCell;
-boolean isCarving = true;
+boolean isCarving = false;
 boolean isPathfinding = false;
 int margin = 10;
 float randomThreshold = 0.5;
@@ -253,6 +253,8 @@ void keyPressed(){
   }
   if(key == 'r'){
     setupConfig();
+  }
+  if(key == ' '){
     isCarving = true;
   }
 }
@@ -269,5 +271,5 @@ just big enough to make it somewhat complicated, but not so big that it takes to
 Also added a random factor that erases some walls so that there are multiple potential routes for the 
 pathfinding algorithm to take (making it take longer to finish).
 
-Added a reset button
+Added a reset button and a start button
 */
