@@ -28,6 +28,11 @@ float calculateDistance(float x1, float y1, float x2, float y2){
 
 void setup(){
   size(820, 820);
+  setupConfig();
+  frameRate(60);
+}
+
+void setupConfig(){
   for(int i = 0; i < xBorder; i++){
     for(int j = 0; j < yBorder; j++){
       cells[i][j] = new Cell(i, j, 200, 200, 255);
@@ -40,7 +45,6 @@ void setup(){
   openSet = Arrays.copyOf(openSet, openSet.length + 1);
   openSet[0] = cells[startPos[0]][startPos[1]];
   cells[startPos[0]][startPos[1]].g = 0;
-  frameRate(60);
 }
 
 void draw(){
@@ -108,7 +112,7 @@ void draw(){
       }
       resPathLen = max(resPathLen, currPathLen);
       println("Total Length: ", resPathLen);
-      noLoop();
+      isPathfinding = false;
     }
   
     if(openSet.length > 0 && !foundEndPos){
@@ -243,6 +247,16 @@ void mousePressed(){
   println("XPos: ", x, "\nYPos: ", y, "\ng cost: ", cells[x][y].g, "\nh cost: ", cells[x][y].h, "\nf cost: ", cells[x][y].f);
 }
 
+void keyPressed(){
+  if(isCarving || isPathfinding){
+    return;
+  }
+  if(key == 'r'){
+    setupConfig();
+    isCarving = true;
+  }
+}
+
 /* 
 Notes: 19 Dec
 
@@ -254,4 +268,6 @@ just big enough to make it somewhat complicated, but not so big that it takes to
 
 Also added a random factor that erases some walls so that there are multiple potential routes for the 
 pathfinding algorithm to take (making it take longer to finish).
+
+Added a reset button
 */
