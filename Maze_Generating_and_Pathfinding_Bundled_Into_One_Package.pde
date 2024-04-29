@@ -38,13 +38,20 @@ void setupConfig(){
       cells[i][j] = new Cell(i, j, 200, 200, 255);
     }
   }
+  isCarving = false;
+  isPathfinding = false;
   current = cells[0][0];  
   cells[0][0].walls[0] = false;
   cells[xBorder - 1][yBorder - 1].walls[2] = false;
   
-  openSet = Arrays.copyOf(openSet, openSet.length + 1);
+  openSet = Arrays.copyOf(openSet, 1);
+  closedSet = new Cell[0];
+  foundEndPos = false;
   openSet[0] = cells[startPos[0]][startPos[1]];
   cells[startPos[0]][startPos[1]].g = 0;
+  
+  currPathLen = 0;
+  resPathLen = 0;
 }
 
 void draw(){
